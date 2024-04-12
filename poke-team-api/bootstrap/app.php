@@ -31,8 +31,8 @@ return Application::configure(basePath: dirname(__DIR__))
             return ReturnApi::error($e->validator->errors()->first(), $e->validator->errors()->toArray());
         });
 
-        $exceptions->render(function (Throwable $e, ) {
-            return ReturnApi::error('Unexpected API error.');            
+        $exceptions->render(function (Throwable $e) {
+            return ReturnApi::error('Unexpected API error.');
         });
 
 

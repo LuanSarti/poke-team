@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('teams', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
+            $table->string('name');
             $table->integer('pokemon_1');
             $table->integer('pokemon_2')->nullable();
             $table->integer('pokemon_3')->nullable();

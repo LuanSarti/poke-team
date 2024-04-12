@@ -10,7 +10,7 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthService
 {
-    public function register($data)
+    public function register($data): User
     {
         return User::create(
             [
@@ -21,7 +21,7 @@ class AuthService
         );
     }
 
-    public function login($data)
+    public function login($data): array
     {
         if (Auth::attempt(["email" => $data["email"], "password" => $data["password"]])) {
             $token = JWTAuth::fromUser(Auth::user());
@@ -30,7 +30,7 @@ class AuthService
         throw new ApiException("Usuário não encontrado");
     }
 
-    public function me()
+    public function me(): User
     {
         if(!JWTAuth::user()) throw new ApiException("Usuário não encontrado");
         return JWTAuth::user();

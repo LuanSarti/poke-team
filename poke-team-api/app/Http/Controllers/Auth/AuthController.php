@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Services\Auth\AuthService;
+use Illuminate\Http\JsonResponse;
 use Throwable;
 
 class AuthController extends Controller
@@ -20,7 +21,7 @@ class AuthController extends Controller
         $this->authService = $authService;
     }
 
-    public function register(RegisterRequest $request)
+    public function register(RegisterRequest $request): JsonResponse
     {
         try {
             $data = $this->authService->register($request->validated());
@@ -30,7 +31,7 @@ class AuthController extends Controller
         }
     }
 
-    public function login(LoginRequest $request)
+    public function login(LoginRequest $request): JsonResponse
     {
         try {
             $data = $this->authService->login($request->validated());
@@ -40,7 +41,7 @@ class AuthController extends Controller
         }
     }
 
-    public function me()
+    public function me(): JsonResponse
     {
         try {
             $data = $this->authService->me();

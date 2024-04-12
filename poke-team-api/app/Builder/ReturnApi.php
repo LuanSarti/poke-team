@@ -6,7 +6,6 @@ use Illuminate\Contracts\Validation\Validator;
 
 class ReturnApi
 {
-
     public static function success($data = null, $message = "")
     {
         return response()->json([
@@ -18,7 +17,6 @@ class ReturnApi
 
     public static function error($message = "", $data = null, $status = 400)
     {
-
         return response()->json(
             [
                 "error" => true,
@@ -32,7 +30,6 @@ class ReturnApi
     protected function failedValidation(Validator $validator)
     {
         $errors = $validator->errors();
-
         return ReturnApi::error($errors->first(), $errors->toArray());
     }
 }
