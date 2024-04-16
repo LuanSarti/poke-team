@@ -7,7 +7,7 @@ class PokemonRuleHelper
     static function rule($required = null): array
     {
         return [
-            'integer',
+            'max:1025',
             $required
         ];
     }

@@ -6,6 +6,8 @@ use App\Builder\ReturnApi;
 use App\Exceptions\ApiException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Team\DeleteRequest;
+use App\Http\Requests\Team\FindByUserIdRequest;
+use App\Http\Requests\Team\FindRequest;
 use App\Http\Requests\Team\StoreRequest;
 use App\Http\Requests\Team\UpdateRequest;
 use App\Services\Team\TeamService;
@@ -21,13 +23,14 @@ class TeamController extends Controller
         $this->teamService = $teamService;
     }
 
-    public function index(): JsonResponse
+    public function find(FindRequest $request): JsonResponse
     {
         try {
-            $data = $this->teamService->index();
-            return ReturnApi::success($data, "times encontrados com sucesso!");
+            $data = $this->teamService->find($request->validated());
+            return ReturnApi::success($data, "time encontrado com sucesso!");
         } catch (Throwable $e) {
-            throw new ApiException($e->getMessage() ?? "Erro ao encontrar times", $e->getCode());
+            dd($e);
+            throw new ApiException($e->getMessage() ?? "Erro ao encontrar time", $e->getCode());
         }
     }
 
@@ -38,6 +41,16 @@ class TeamController extends Controller
             return ReturnApi::success($data, "time criado com sucesso!");
         } catch (Throwable $e) {
             throw new ApiException($e->getMessage() ?? "Erro ao criar time", $e->getCode());
+        }
+    }
+
+    public function findByUserId(FindByUserIdRequest $request): JsonResponse
+    {
+        try {
+            $data = $this->teamService->findByUserId($request->validated());
+            return ReturnApi::success($data, "times encontrados com sucesso!");
+        } catch (Throwable $e) {
+            throw new ApiException($e->getMessage() ?? "Erro ao encontrar times", $e->getCode());
         }
     }
 

@@ -7,17 +7,24 @@ interface Iprops {
   id: string;
   label: string;
   type?: string;
+  defaultValue?: string;
 }
 
-export default function InputFild({ id, label, type = "text" }: Iprops) {
+export default function InputFild({
+  id,
+  label,
+  type = "text",
+  defaultValue = "",
+}: Iprops) {
   return (
     <div className="relative mt-8">
       <Input
-        className="bg-neutral-600"
+        className="rounded bg-neutral-600"
         placeholder={id}
         type={type}
         name={id}
         id={id}
+        defaultValue={defaultValue}
       />
       <Label
         className="animation absolute left-2 top-2 text-base opacity-60"

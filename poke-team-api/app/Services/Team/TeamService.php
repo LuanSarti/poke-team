@@ -4,12 +4,13 @@ namespace App\Services\Team;
 
 use App\Models\Team;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Collection;
 
 class TeamService
 {
-    public function index(): LengthAwarePaginator
+    public function find($data): Team
     {
-        return Team::paginate(10);
+        return Team::find($data['id']);
     }
 
     public function store($data): Team
@@ -26,5 +27,10 @@ class TeamService
     public function delete($data): bool
     {
         return Team::find($data['id'])->delete();
+    }
+
+    public function findByUserId($data): Collection
+    {
+        return Team::where('user_id', $data['userId'])->get();
     }
 }

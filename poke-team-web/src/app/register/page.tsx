@@ -2,19 +2,19 @@
 
 import InputFild from "@/components/InputFild";
 import { Button } from "@/components/ui/button";
-import { fetchOptions } from "@/utils/fetchOptions";
 import { useMutation } from "@tanstack/react-query";
 import toast, { Toaster } from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { fetchOptions } from "@/utils/fetchOptions";
 
-export default function Home() {
+export default function Register() {
   const router = useRouter();
 
   const mutation = useMutation({
     mutationFn: async (formData: object) => {
       try {
         const request = await fetch(
-          `${process.env.NEXT_PUBLIC_API_BASE_ROUTE}auth/login`,
+          `${process.env.NEXT_PUBLIC_API_BASE_ROUTE}auth/register`,
           fetchOptions("POST", formData),
         );
         const response = await request.json();
@@ -30,10 +30,12 @@ export default function Home() {
     },
   });
 
-  function login(formData: FormData) {
+  function register(formData: FormData) {
     const rawFormData = {
+      name: formData.get("name"),
       email: formData.get("email"),
       password: formData.get("password"),
+      password_confirmation: formData.get("password_confirmation"),
     };
 
     mutation.mutate(rawFormData, {
@@ -42,10 +44,16 @@ export default function Home() {
           toast.error(data.message);
         }
 
-        sessionStorage.setItem("token", data.data.token);
-        sessionStorage.setItem("id", data.data.user.id);
-
-        router.push("/pokedex");
+        toast((t) => (
+          <button
+            onClick={() => {
+              router.push("/");
+              toast.dismiss(t.id);
+            }}
+          >
+            fazer login
+          </button>
+        ));
       },
     });
   }
@@ -56,11 +64,17 @@ export default function Home() {
       <div className="container flex h-full items-center justify-center">
         <form
           className="w-[50%] rounded-[20px] bg-neutral-950 px-12 pb-4 pt-12 text-2xl shadow-2xl"
-          action={login}
+          action={register}
         >
-          <legend className="w-full text-center">Login</legend>
+          <legend className="w-full text-center">Criar usuário</legend>
+          <InputFild id="name" label="nome" type="text" />
           <InputFild id="email" label="e-mail" type="email" />
           <InputFild id="password" label="senha" type="password" />
+          <InputFild
+            id="password_confirmation"
+            label="confirmar senha"
+            type="password"
+          />
           <div className="flex w-full justify-center">
             <Button className="mt-8 rounded" size={"lg"} type="submit">
               Entrar
@@ -71,10 +85,10 @@ export default function Home() {
               type="button"
               className="animation mt-2 bg-neutral-950 text-foreground hover:bg-neutral-950 hover:text-neutral-400"
               onClick={() => {
-                router.push("/register");
+                router.push("/");
               }}
             >
-              Cirar conta
+              Fazer login
             </Button>
           </div>
         </form>
