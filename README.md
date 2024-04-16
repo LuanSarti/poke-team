@@ -27,7 +27,7 @@ Esta é uma aplicação fullstack, para criar e gerenciar times de pokémon.
 4. Configure no arquivo `.env` as suas informações de banco de dados
 5. Gere uma chave JWT com o comando `php artisan jwt:secret`
 6. Crie o banco de dados e as tableas com o comando `php artisan migrate`
-   6.1. Caso não exista o banco de dados no seu servidor, o artisan vai perguntar se ele pode criar, basta confirmar
+   --Caso não exista o banco de dados no seu servidor, o artisan vai perguntar se ele pode criar, basta confirmar
 7. Inicie o servidor local com o comando `php artisan serve`
 
 ### Na pasta da web
@@ -35,6 +35,6 @@ Esta é uma aplicação fullstack, para criar e gerenciar times de pokémon.
 1. Em outro terminal entre na pasta poke-tem-web com o comando `cd poke-team-web`
 2. Instale as dependencias `npm i`
 3. Crie um arquivo de váriaveis de ambiente `.env.local` na raiz da pasta `poke-team-web`, nele adicione a váriavel `NEXT_PUBLIC_API_BASE_ROUTE` com a rota `http://{laravelServer}/api/`
-   3.1. No terminal que foi iniciado o servidor local da api está registrado o domínio que precisa ser colocado no lugar das chaves
+   --No terminal que foi iniciado o servidor local da api está registrado o domínio que precisa ser colocado no lugar das chaves
 4. Inicie o servidor local com o comando `npm run dev`
 5. No navegador acesse o local que foi iniciado o servidor local registrado no terminal
