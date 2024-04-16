@@ -6,7 +6,7 @@ interface Iprops {
   id: number;
 }
 export default function Pokemon({ id }: Iprops) {
-  async function findPokemon(id: any) {
+  async function findPokemon(id: number) {
     try {
       const request = await fetch(
         `http://127.0.0.1:8000/api/pokemon/find/${id}`,
@@ -47,6 +47,7 @@ export default function Pokemon({ id }: Iprops) {
 
   return (
     <div>
+      <span className="text-black">{data?.name ?? "vazio"}</span>
       <Image
         width={100}
         height={100}

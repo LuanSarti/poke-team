@@ -44,6 +44,8 @@ export default function Register() {
           toast.error(data.message);
         }
 
+        toast.success("Usuário criado com sucesso");
+
         toast((t) => (
           <button
             onClick={() => {
